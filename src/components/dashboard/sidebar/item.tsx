@@ -1,11 +1,14 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { ReactNode } from "react";
 
 interface Props {
+  className?: string;
   item: {
     name: string;
     href: string;
+    icon: ReactNode;
   };
 }
 
@@ -14,13 +17,16 @@ export default function ItemSidebar(prop: Readonly<Props>) {
   return (
     <Link
       className={`${
-        path.startsWith(`/dashboard/${prop.item.href}`)
-          ? "bg-tremor-background-subtle dark:bg-dark-tremor-background-subtle font-bold"
+        path === `/dashboard${prop.item.href}`
+          ? "font-bold border-l-4 border-tremor-background-emphasis dark:border-tremor-background-subtle bg-tremor-background-subtle  dark:bg-dark-tremor-background-subtle"
           : ""
-      } flex w-full pl-2 py-2 hover:bg-tremor-background-subtle hover:dark:bg-dark-tremor-background-subtle`}
-      href={`/dashboard/${prop.item.href}`}
+      } flex flex-row space-x-2 items-center w-full lhover:bg-tremor-background-subtle hover:dark:bg-dark-tremor-background-subtle ${
+        prop.className
+      }`}
+      href={`/dashboard${prop.item.href}`}
     >
-      {prop.item.name}
+      {prop.item.icon}
+      <span>{prop.item.name}</span>
     </Link>
   );
 }
