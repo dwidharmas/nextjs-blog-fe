@@ -1,3 +1,4 @@
+"use client";
 import PageDashbaord from "@/components/dashboard/page";
 import {
   Table,
@@ -8,14 +9,19 @@ import {
   TableRow,
   Button,
 } from "@tremor/react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function MyPage() {
+  const path = usePathname();
   return (
     <PageDashbaord title="My Page">
       <header className="mb-4 flex flex-row justify-between">
         <p>List of my page</p>
         <div>
-          <Button variant="primary">Add Page</Button>
+          <Link href={`${path}/create`}>
+            <Button variant="primary">Add Page</Button>
+          </Link>
         </div>
       </header>
       <Table>

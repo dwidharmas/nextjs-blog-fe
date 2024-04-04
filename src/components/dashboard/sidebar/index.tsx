@@ -4,12 +4,13 @@ import ItemSidebar from "./item";
 import { RiDashboard2Fill, RiArticleFill } from "@remixicon/react";
 import { Icon } from "@tremor/react";
 import { usePathname } from "next/navigation";
+import { useMemo } from "react";
 
 const ItemList = [
   {
     id: 0,
     name: "Dashboard",
-    href: "",
+    href: "/main",
     icon: RiDashboard2Fill,
   },
   {
@@ -23,7 +24,7 @@ const ItemList = [
 export default function SidebarDashboard() {
   const path = usePathname();
   return (
-    <div className="flex flex-col h-full min-w-56 mr-4 bg-tremor-background dark:bg-dark-tremor-background">
+    <div className="flex flex-col h-full min-w-56 mr-4 bg-tremor-background ">
       <div className="flex flex-row items-center space-x-3 px-4 py-4 h-24">
         <LogoDwi />
       </div>
@@ -34,11 +35,11 @@ export default function SidebarDashboard() {
               <ItemSidebar
                 className={"px-4 py-2"}
                 href={item.href}
-                active={path === `/dashboard${item.href}`}
+                active={path.startsWith(`/dashboard${item.href}`)}
               >
                 <Icon
                   icon={item.icon}
-                  className="bg-dark-tremor-background-subtle  dark:bg-tremor-background-subtle"
+                  className="bg-dark-tremor-background-subtle"
                   size="sm"
                   variant="solid"
                   tooltip={item.name}
